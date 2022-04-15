@@ -1,29 +1,39 @@
 .item-div:hover img {
   filter: grayscale(80%);
 }
+.img{
+  -webkit-transition: filter 0.5s;
+
+}
 .item-div:hover .read-more {
-  /* background-color: rgb(135, 221, 255); */
-  /* background-color: rgb(135, 210, 255); */
+
   box-shadow: 5px 5px 2px 1px rgb(135, 210, 255);
   border: 0px;
-  /* color: black; */
+
 }
+
+.read-more{
+  -webkit-transition: box-shadow 0.5s;
+
+}
+
 .item-div:hover {
-  /* border: 1px solid rgb(145, 210, 253); */
+
   box-shadow: 10px 10px 2px 1px rgb(135, 210, 255);
-  /* box-shadow: 5px 1px 1px 1px 1px rgb(145, 210, 253) ; */
+
 }
 .heading {
   text-transform: capitalize;
 }
 
 .item-div {
-  /* border-style: ; */
-  /* border: 3px dotted black; */
+
   border-radius: 1px;
   border-left: 4px solid rgb(0, 0, 0);
   border-bottom: 4px solid rgb(0, 0, 0);
   box-shadow: 0px 0px 0px 0px 0px;
+  -webkit-transition: box-shadow 0.5s;
+
 }
 .my-img {
   padding: 0px;
@@ -33,14 +43,94 @@
 @media screen and (width<750px) {
   .item-div {
     border: 4px solid black;
-  } 
+  }
 
   .read-more {
     border: 0px;
-
   }
   .item-div {
+  }
+  .tag {
+    background-color: rgb(135, 210, 255);
+  }
 
+  .tag {
+    background-color: rgb(135, 210, 255);
+    color: rgb(0, 0, 0);
+  }
+
+  .tag::after {
+    border-left-color: rgb(135, 210, 255);
   }
 }
 
+
+.tags {
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.tags li {
+  float: left;
+}
+
+.tag {
+  background: #eee;
+  border-radius: 3px 0 0 3px;
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  -webkit-transition: color 0.5s;
+}
+
+.tag::before {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: "";
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+
+.tag::after {
+  background: #fff;
+  border-bottom: 13px solid transparent;
+  border-left: 10px solid #eee;
+  border-top: 13px solid transparent;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.item-div:hover .tag {
+  background-color: rgb(135, 210, 255);
+  color: rgb(0, 0, 0);
+}
+
+.item-div:hover .tag::after {
+  border-left-color: rgb(135, 210, 255);
+}
+
+/* @media screen and (width>500){
+
+  .item-div{
+    width: 60vw;
+    color: brown;
+  }
+  .read-more{
+    color: aqua;
+  }
+ */
+
+/* } */

@@ -29,6 +29,7 @@ const News2 = (props) => {
         let parsedData = await data.json();
         setArticles(parsedData.results);
         setTotalResults(parsedData.totalResults);
+
         props.setProgress(100);
     }
 
@@ -58,7 +59,7 @@ const News2 = (props) => {
 
     return (
         <>
-            <div className="container mt-5">
+            <div className="my-container mt-5">
                 <div className="container heading-main-div"><h1 className="text-center mt-6 heading-main py-2 px-5">{(props.category)} Headlines</h1></div></div>
                 
             <InfiniteScroll
@@ -67,7 +68,7 @@ const News2 = (props) => {
                 hasMore={articles.length !== totalResults}
                 loader={<Spinner />}
             >
-                <div className="container">
+                <div className="my-container">
                     <div className="row">
                         {articles.map((element) => {
 
@@ -75,8 +76,8 @@ const News2 = (props) => {
                             let dateStore = myDate.split(" ");
                             let displayDate = dateStore[0] + "," + dateStore[2] + " " + dateStore[1] + ", " + dateStore[3];
 
-                            return <div className="col-md-3" key={element.url}>
-                                <NewsItem title={element.title != null ? element.title.slice(0, 60) : "Breaking News : News Live From   "} description={element.description != null ? element.description.slice(0, 100) : "Latest news. For more updates stay tuned. To read more click on READ MORE    ."} imageUrl={element.image_url != null ? element.image_url : nullImageUrl} newsUrl={element.link} author={element.creator != null ? element.creator.slice(0, 11) : "Newzify"} publishedAt={displayDate} source={element.source_id.slice(0, 23)} />
+                            return <div className={`col-md-3`} key={element.url}>
+                                <NewsItem title={element.title != null ? element.title.slice(0, 60) : "Breaking News : News Live From   "} description={element.description != null ? element.description.slice(0, 190) : "Latest news. For more updates stay tuned. To read more click on READ MORE    ."} imageUrl={element.image_url != null ? element.image_url : nullImageUrl} newsUrl={element.link} author={element.creator != null ? element.creator.slice(0, 11) : "Newzify"} publishedAt={displayDate} source={element.source_id.slice(0, 23)} />
                             </div>
                         })}
                     </div>
