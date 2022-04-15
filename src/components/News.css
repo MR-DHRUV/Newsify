@@ -1,0 +1,29 @@
+.my-loading-spinner {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.heading-main {
+  text-transform: uppercase;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 1000;
+  border-bottom: 8px groove rgb(135, 210, 255);
+  color: rgb(135, 210, 255);
+  margin-top: 4vh;
+}
+.heading-main-div {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+@media screen and (width<750px) {
+  .heading-main {
+    font-size: 1.31rem;
+    border-bottom: 5px groove rgb(255, 255, 255);
+    color: white;
+  }
+}

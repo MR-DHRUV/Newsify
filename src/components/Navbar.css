@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+a {
+  text-transform: capitalize;
+}
+.my-link:hover {
+  border-bottom: 5px solid rgb(135, 210, 255);
+}
+.my-link {
+  font-family: "Lobster", cursive;
+  opacity: 1;
+  z-index: 20;
+  color: rgb(0, 0, 0, 0);
+  font-size: 1.28rem;
+}
+nav {
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  /* background-image: linear-gradient(to bottom right, #e4fbed,white); */
+}
+.my-brand-logo {
+  padding-right: 1vw;
+  background-image: linear-gradient(
+    -225deg,
+    #0a02ff 0%,
+    #05b9ff 29%,
+    #0087ff 67%,
+    #0164ff 100%
+  );
+
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+}
+#heading {
+  font-size: 1.5rem;
+}
+
+@media screen and (width<750px) {
+  #heading {
+    font-size: 1.4rem;
+  }
+  .my-link {
+    color: rgb(255, 0, 0);
+  }
+  nav {
+    background-image: linear-gradient(to bottom right, #e4fbed, white);
+  }
+}

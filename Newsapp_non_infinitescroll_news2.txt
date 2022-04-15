@@ -1,0 +1,128 @@
+import React, { Component } from 'react'
+import NewsItem from './NewsItem';
+import Spinner from './Spinner';
+import "./News.css"
+import PropTypes from 'prop-types'
+
+
+export class News2 extends Component {
+    static defaultProps = {
+        country  : 'in',
+        pageSize : 20,
+        category : "general"
+
+
+    }
+
+    static propTypes = {
+        country: PropTypes.string,
+        pageSize : PropTypes.number,
+        category : PropTypes.string,
+    }
+
+    constructor() {
+        super();
+        this.state = {
+            articles:[],
+            page: 1,
+            totalResults: 1,
+            pageSize : 20,
+            loading : false,
+        }
+    }
+
+    async updateNews(pageNo){
+        const apiUrl = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7a1afabd72ee48e699e5f90513f5db37&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        this.setState({loading:true});
+        
+        let data = await fetch(apiUrl);
+        let parsedData = await data.json();
+        this.setState({ articles: parsedData.articles, totalResults: parsedData.totalResults ,loading:false})
+
+    }
+
+
+    async componentDidMount() {
+        let apiUrl = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7a1afabd72ee48e699e5f90513f5db37&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        this.setState({loading:true});
+        
+        let data = await fetch(apiUrl);
+        let parsedData = await data.json();
+        this.setState({ articles: parsedData.articles, totalResults: parsedData.totalResults ,loading:false})
+    }
+
+    nullImageUrl = "https://images.unsplash.com/photo-1495020689067-958852a7765e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80";
+
+
+    // for next button
+    nextPageHandler = async () => {
+
+        if ((this.state.page) + (1) > (Math.ceil((this.state.totalResults) / this.props.pageSize))) {
+
+        }
+        // this if is to make sure that state does not change if there were no more pages
+
+        else {
+            let apiUrl = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7a1afabd72ee48e699e5f90513f5db37&page=${(this.state.page) + (1)}&pageSize=${this.props.pageSize}`;
+            this.setState({loading:true});
+            this.setState({ page: (this.state.page) + (1) });
+
+            let data = await fetch(apiUrl);
+            let parsedData = await data.json();
+            this.setState({ articles: parsedData.articles })
+            this.setState({loading:false});
+        }
+    }
+
+
+    // for previous button
+    previousPageHandler = async () => {
+
+
+        let apiUrl = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7a1afabd72ee48e699e5f90513f5db37&page=${(this.state.page) - (1)}&pageSize=${this.props.pageSize}`
+        this.setState({loading:true});
+        this.setState({ page: (this.state.page) - (1) });
+
+        let data = await fetch(apiUrl);
+        let parsedData = await data.json();
+        this.setState({ articles: parsedData.articles })
+        this.setState({loading:false});
+    }
+
+    render() {
+        return (
+            <div className="container my-3">
+                <h1 className="text-center">Top Headlines</h1>
+                {this.state.loading && <div className="container text-center my-loading-spinner"><Spinner /></div>}
+                 
+                
+                <div className="row">
+                    { !this.state.loading && this.state.articles.map((element) => {
+                        
+                            let myDate = Date(element.publishedAt);
+                            let dateStore = myDate.split(" ");
+                            let displayDate = dateStore[0] + "," + dateStore[2] + " " + dateStore[1] + ", " + dateStore[3];
+
+                        return <div className="col-md-3" key={element.url}>
+                            <NewsItem title={element.title != null ? element.title.slice(0, 40) : ""} description={element.description != null ? element.description.slice(0, 80) : ""} imageUrl={element.urlToImage != null ? element.urlToImage : this.nullImageUrl} newsUrl={element.url} author={element.author != null ? element.author : "Newzify" } publishedAt={displayDate} source={element.source.name} />
+                        </div>
+                    })}
+                </div>
+
+                <div className="container d-flex justify-content-between">
+                    <button type="button" disabled={this.state.page <= 1} className="btn btn-dark" onClick={this.previousPageHandler} >&larr; Previous</button>
+
+
+                    <button type="button" className="btn btn-dark" disabled={(this.state.page) + (1) > (Math.ceil((this.state.totalResults) / this.props.pageSize))} onClick={this.nextPageHandler}>Next &rarr;</button>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default News2
+
+
+
+
+
