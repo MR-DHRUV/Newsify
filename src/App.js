@@ -5,7 +5,7 @@ import News2 from './components/News2';
 import LoadingBar from 'react-top-loading-bar';
 
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
